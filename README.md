@@ -4,9 +4,10 @@ I heavily depended on https://github.com/MarioSieg/BGFX_Noesis_Renderer/tree/mai
 Example is a conversion of this project https://github.com/Noesis/Tutorials/tree/master/Samples/IntegrationGLUT
 You can press F1 to view debug information. No idea if it's useful though.
 
-Here's an example of the intended output:
+Here's an example of the intended output (The mouse click artifacts aren't actually there):
 https://imgur.com/warYgWY.gif
-And here's an example of the current output using bgfx:
+
+And here's an example of the current output using bgfx (The mouse click artifacts aren't actually there):
 https://imgur.com/0p98hhC.gif
 
 This project was made in CLion on windows. I use vcpkg for bgfx, glfw3 and glm. There are other packages in vcpkg.json. No idea why; they might be needed. 
