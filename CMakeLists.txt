@@ -3,27 +3,36 @@ project(NoesisTesting)
 
 set(CMAKE_CXX_STANDARD 23)
 
-add_executable(NoesisTesting Shader.cpp Shader.h glad.h glad.c main.cpp)
+add_executable(NoesisTesting main.cpp
+        BGFXRenderContext/Src/BGFXRenderContext.cpp
+        BGFXRenderContext/Src/BGFXRenderContext.hpp
+        BGFXRenderDevice/Include/NsRender/BGFXFactory.hpp
+        BGFXRenderDevice/Include/NsRender/BGFXRenderDeviceApi.hpp
+        BGFXRenderDevice/Src/BGFXRenderDevice.cpp
+        BGFXRenderDevice/Src/BGFXRenderDevice.hpp
+        BGFXRenderDevice/Src/Render.BGFXRenderDevice.cpp
+        BGFXRenderContext/Src/Render.BGFXRenderContext.cpp)
 
 # glfw
 find_package(glfw3 CONFIG REQUIRED)
 
-# glad
-#find_package(glad CONFIG REQUIRED)
-
 # glm
 find_package(glm CONFIG REQUIRED)
 
-target_link_libraries(${PROJECT_NAME} PRIVATE glm::glm glfw #[[glad::glad]])
+find_package(bgfx CONFIG REQUIRED)
+
+target_link_libraries(${PROJECT_NAME} PRIVATE bgfx::bx bgfx::bgfx bgfx::bimg bgfx::bimg_decode glm::glm glfw #[[glad::glad]])
 
 # noesisgui
-if(WIN32)
-    set(NOESIS_DIR "C:/dev/NoesisGUI")
-elseif(UNIX AND NOT APPLE)
-    set(NOESIS_DIR "/mnt/c/dev/NoesisGUI-linux")
-else()
-    message(FATAL_ERROR "NoesisGUI is only supported on Windows and linux.")
+set(NOESIS_DIR "C:/dev/NoesisGUI")
+if(UNIX)
+    if (APPLE)
+        set(NOESIS_DIR "${NOESIS_DIR}-macos")
+    else()
+        set(NOESIS_DIR "${NOESIS_DIR}-linux")
+    endif()
 endif()
+
 target_include_directories(${PROJECT_NAME} PUBLIC ${NOESIS_DIR}/Include)
 target_include_directories(${PROJECT_NAME} PUBLIC ${NOESIS_DIR}/Src/Packages/)
 target_include_directories(${PROJECT_NAME} PUBLIC ${NOESIS_DIR}/Src/Packages/App/ApplicationLauncher/Include)
@@ -39,7 +48,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC ${NOESIS_DIR}/Src/Packages/App
 target_include_directories(${PROJECT_NAME} PUBLIC ${NOESIS_DIR}/Src/Packages/App/Shaders/Include)
 target_include_directories(${PROJECT_NAME} PUBLIC ${NOESIS_DIR}/Src/Packages/App/Theme/Include)
 target_include_directories(${PROJECT_NAME} PUBLIC ${NOESIS_DIR}/Src/Packages/Render/RenderContext/Include)
-target_include_directories(${PROJECT_NAME} PUBLIC ${NOESIS_DIR}/Src/Packages/Render/GLRenderDevice/Include)
+
 if(WIN32)
     find_library(Noesis NAMES "Noesis" HINTS "${NOESIS_DIR}/Lib/windows_x86_64" REQUIRED)
     find_library(NoesisApp NAMES "NoesisApp" HINTS "${NOESIS_DIR}/Lib/windows_x86_64" REQUIRED)

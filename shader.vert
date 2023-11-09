@@ -1,12 +1,10 @@
-#version 330 core
+$input a_position, a_color0
+$output v_color0
 
-layout(location = 0) in vec2 aPos;
-layout(location = 1) in vec2 aTexCoord;
-
-out vec2 TexCoord;
+#include <bgfx_shader.sh>
 
 void main()
 {
-    TexCoord = aTexCoord;
-    gl_Position = vec4(aPos.x, aPos.y, 0.0, 1.0);
+    gl_Position = u_proj * vec4(a_position, 1.0);
+    v_color0 = a_color0;
 }

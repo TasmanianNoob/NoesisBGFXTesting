@@ -1,12 +1,6 @@
-#version 330 core
-
-out vec4 FragColor;
-
-in vec2 TexCoord;
-
-uniform sampler2D screenTexture;
+$input v_color0
 
 void main()
 {
-    FragColor = texture(screenTexture, TexCoord);
+    gl_FragColor = v_color0;
 }
