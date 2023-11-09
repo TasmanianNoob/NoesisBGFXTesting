@@ -163,11 +163,11 @@ int main()
 		bgfx::reset(800, 600, BGFX_RESET_VSYNC);
 		bgfx::resetView(0);
 		bgfx::setViewRect(0, 0, 0, 800, 600);
+		bgfx::touch(0);
 
 		// Rendering is done in the active framebuffer
 		_view->GetRenderer()->Render();
 
-		bgfx::touch(0);
 		bgfx::setDebug(showDebug ? BGFX_DEBUG_STATS : BGFX_DEBUG_NONE);
 		bgfx::frame();
 
