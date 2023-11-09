@@ -4,6 +4,11 @@ I heavily depended on https://github.com/MarioSieg/BGFX_Noesis_Renderer/tree/mai
 Example is a conversion of this project https://github.com/Noesis/Tutorials/tree/master/Samples/IntegrationGLUT
 You can press F1 to view debug information. No idea if it's useful though.
 
+Here's an example of the intended output:
+https://imgur.com/warYgWY
+And here's an example of the current output using bgfx:
+https://imgur.com/0p98hhC
+
 This project was made in CLion on windows. I use vcpkg for bgfx, glfw3 and glm. There are other packages in vcpkg.json. No idea why; they might be needed. 
 
 shader.frag, shader.vert and varying.def.sc aren't used. Maybe they should be?
