@@ -17,6 +17,16 @@
 #include <NsGui/Grid.h>
 #include <NsGui/Uri.h>
 
+static bool showDebug = false;
+
+static void glfw_keyCallback(GLFWwindow *window, int key, int scancode, int action, int mods)
+{
+	if (key == GLFW_KEY_F1 && action == GLFW_RELEASE)
+	{
+		showDebug = !showDebug;
+	}
+}
+
 int main()
 {
 	glfwInit();
@@ -25,11 +35,14 @@ int main()
 
 	GLFWwindow* window = glfwCreateWindow(800, 600, "Noesis Test", nullptr, nullptr);
 
+
 	if (window == nullptr)
 	{
 		std::cout << "bad 1\n";
 		return 1;
 	}
+
+	glfwSetKeyCallback(window, glfw_keyCallback);
 
 	bgfx::Init init;
 
@@ -155,6 +168,7 @@ int main()
 		_view->GetRenderer()->Render();
 
 		bgfx::touch(0);
+		bgfx::setDebug(showDebug ? BGFX_DEBUG_STATS : BGFX_DEBUG_NONE);
 		bgfx::frame();
 
 		glfwPollEvents();
