@@ -33,7 +33,9 @@ int main()
 
 	glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
 
-	GLFWwindow* window = glfwCreateWindow(800, 600, "Noesis Test", nullptr, nullptr);
+	int width = 1000, height = 600;
+
+	GLFWwindow* window = glfwCreateWindow(width, height, "Noesis Test", nullptr, nullptr);
 
 
 	if (window == nullptr)
@@ -128,7 +130,7 @@ int main()
 	auto accumulatedTime = 0.0f;
 
 	//should be used on resize
-	_view->SetSize(800, 600);
+	_view->SetSize(width, height);
 
 	while(!glfwWindowShouldClose(window))
 	{
@@ -160,9 +162,9 @@ int main()
 		// If you are going to render here with your own engine you need to restore the GPU state
 		// because noesis changes it. In this case only framebuffer and viewport need to be restored
 		bgfx::setStencil(BGFX_STENCIL_NONE, BGFX_STENCIL_NONE);
-		bgfx::reset(800, 600, BGFX_RESET_VSYNC);
+		bgfx::reset(width, height, BGFX_RESET_VSYNC);
 		bgfx::resetView(0);
-		bgfx::setViewRect(0, 0, 0, 800, 600);
+		bgfx::setViewRect(0, 0, 0, width, height);
 		bgfx::touch(0);
 
 		// Rendering is done in the active framebuffer

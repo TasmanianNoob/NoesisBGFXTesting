@@ -104,6 +104,6 @@ EXIT /B 0
 
 :shaderc
     if exist %1.bin del %1.bin
-    shaderc.exe -f %2.%3 -o %1.bin --platform windows --profile s_5_0 --type %3 -i %CD% --verbose --define %4
+    %CD%\shaderc.exe -f %2.%3 -o %1.bin --platform windows --profile s_5_0 --type %3 -i %CD% --verbose --define %4
     if %errorlevel% neq 0 EXIT /B %errorlevel%
     EXIT /B 0
