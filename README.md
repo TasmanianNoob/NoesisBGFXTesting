@@ -1,6 +1,9 @@
 # NoesisTesting
 I heavily depended on https://github.com/MarioSieg/BGFX_Noesis_Renderer/tree/main and https://github.com/Dakror/noesis-bgfx/tree/master but tried to remove their in-house features (convert to plug and play). **It is currently not working.**
 
+Example is a conversion of this project https://github.com/Noesis/Tutorials/tree/master/Samples/IntegrationGLUT
+You can press F1 to view debug information. No idea if it's useful though.
+
 This project was made in CLion on windows. I use vcpkg for bgfx, glfw3 and glm. There are other packages in vcpkg.json. No idea why; they might be needed. 
 
 shader.frag, shader.vert and varying.def.sc aren't used. Maybe they should be?
