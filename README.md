@@ -13,7 +13,6 @@ https://imgur.com/0p98hhC.gif
 
 # Getting Setup
 If you're trying to get this to work first make sure that `BGFXRenderDevice/Src/Shaders/build_shaders.bat` is ran before the program to compile the shaders.
-You need to either have environmental variables setup so you can do shaderc.exe from the command line or just find the file manually (replace `shader.exe` with `/path/to/shader.exe` (probably?)).
 
 If the program crashes immediately hopefully the issue is just you're compiling to the wrong shader language.
 Change `--profile s_5_0` to whatever is more appropriate. Use the debugger to check what `bgfx::getRendererType()` is set to. Probably metal on MacOS and spirv on Linux.
