@@ -46,4 +46,4 @@ spirv16-13
 440
 ```
 
-If the program still crashes. Shit 🤷.
+If the program still crashes then idk lol.
