@@ -1,5 +1,5 @@
 # NoesisTesting
-I heavily depended on https://github.com/MarioSieg/BGFX_Noesis_Renderer/tree/main and https://github.com/Dakror/noesis-bgfx/tree/master but tried to remove their in-house features (plug and play). It is currently not working.
+I heavily depended on https://github.com/MarioSieg/BGFX_Noesis_Renderer/tree/main and https://github.com/Dakror/noesis-bgfx/tree/master but tried to remove their in-house features (convert to plug and play). It is currently not working.
 
 This project was made in CLion on windows. I use vcpkg for bgfx, glfw3 and glm. There are other packages in vcpkg.json. No idea why; they might be needed. 
 
