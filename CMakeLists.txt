@@ -4,14 +4,11 @@ project(NoesisTesting)
 set(CMAKE_CXX_STANDARD 23)
 
 add_executable(NoesisTesting main.cpp
-        BGFXRenderContext/Src/BGFXRenderContext.cpp
-        BGFXRenderContext/Src/BGFXRenderContext.hpp
         BGFXRenderDevice/Include/NsRender/BGFXFactory.hpp
         BGFXRenderDevice/Include/NsRender/BGFXRenderDeviceApi.hpp
         BGFXRenderDevice/Src/BGFXRenderDevice.cpp
         BGFXRenderDevice/Src/BGFXRenderDevice.hpp
-        BGFXRenderDevice/Src/Render.BGFXRenderDevice.cpp
-        BGFXRenderContext/Src/Render.BGFXRenderContext.cpp)
+        BGFXRenderDevice/Src/Render.BGFXRenderDevice.cpp)
 
 # glfw
 find_package(glfw3 CONFIG REQUIRED)
@@ -19,20 +16,13 @@ find_package(glfw3 CONFIG REQUIRED)
 # glm
 find_package(glm CONFIG REQUIRED)
 
+# bgfx
 find_package(bgfx CONFIG REQUIRED)
 
-target_link_libraries(${PROJECT_NAME} PRIVATE bgfx::bx bgfx::bgfx bgfx::bimg bgfx::bimg_decode glm::glm glfw #[[glad::glad]])
+target_link_libraries(${PROJECT_NAME} PRIVATE bgfx::bx bgfx::bgfx bgfx::bimg bgfx::bimg_decode glm::glm glfw)
 
 # noesisgui
 set(NOESIS_DIR "C:/dev/NoesisGUI")
-if(UNIX)
-    if (APPLE)
-        set(NOESIS_DIR "${NOESIS_DIR}-macos")
-    else()
-        set(NOESIS_DIR "${NOESIS_DIR}-linux")
-    endif()
-endif()
-
 target_include_directories(${PROJECT_NAME} PUBLIC ${NOESIS_DIR}/Include)
 target_include_directories(${PROJECT_NAME} PUBLIC ${NOESIS_DIR}/Src/Packages/)
 target_include_directories(${PROJECT_NAME} PUBLIC ${NOESIS_DIR}/Src/Packages/App/ApplicationLauncher/Include)
