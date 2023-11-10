@@ -129,7 +129,6 @@ int main()
 	auto lastTime = std::chrono::high_resolution_clock::now();
 	auto accumulatedTime = 0.0f;
 
-	//should be used on resize
 	_view->SetSize(width, height);
 
 	while(!glfwWindowShouldClose(window))
@@ -161,7 +160,6 @@ int main()
 
 		// If you are going to render here with your own engine you need to restore the GPU state
 		// because noesis changes it. In this case only framebuffer and viewport need to be restored
-		bgfx::setStencil(BGFX_STENCIL_NONE, BGFX_STENCIL_NONE);
 		bgfx::reset(width, height, BGFX_RESET_VSYNC);
 		bgfx::resetView(0);
 		bgfx::setViewRect(0, 0, 0, width, height);
@@ -178,6 +176,7 @@ int main()
 		lastTime = currentTime;
 	}
 
+	_view->GetRenderer()->Shutdown();
 	_view->Release();
 	Noesis::GUI::Shutdown();
 

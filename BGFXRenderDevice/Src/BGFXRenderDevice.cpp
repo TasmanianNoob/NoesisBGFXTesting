@@ -109,7 +109,8 @@ void BGFXRenderDevice::EndOffscreenRender()
 
 void BGFXRenderDevice::BeginOnscreenRender()
 {
-	bgfx::setViewRect(this->viewId, 0, 0, this->width, this->height);
+	bgfx::setViewRect(viewId, 0, 0, width, height);
+	bgfx::setViewMode(viewId, bgfx::ViewMode::Sequential);
 }
 
 void BGFXRenderDevice::EndOnscreenRender()
@@ -193,7 +194,7 @@ void BGFXRenderDevice::DrawBatch(const Noesis::Batch& batch)
 	begin = dynamicIB.data() + batch.startIndex * sizeof(uint16_t);
 	end = begin + batch.numIndices * sizeof(uint16_t);
 	std::copy(begin, end, target);
-	bgfx::setIndexBuffer(&indexBuffer, batch.startIndex, batch.numIndices);
+	bgfx::setIndexBuffer(&indexBuffer, 0, batch.numIndices);
 
 	uint32_t state = 0, stencil = 0;
 
@@ -221,9 +222,11 @@ void BGFXRenderDevice::DrawBatch(const Noesis::Batch& batch)
 				stencil |= BGFX_STENCIL_OP_FAIL_S_KEEP | BGFX_STENCIL_OP_FAIL_Z_KEEP | BGFX_STENCIL_OP_PASS_Z_DECR;
 				break;
 			default:
+				std::cout << "Unsupported stencil mode: BGFXRenderDevice::DrawBatch(const Noesis::Batch& batch)\n";
 				abort();
 		}
 	}
+
 	if (batch.stencilRef)
 	{
 		stencil |= BGFX_STENCIL_TEST_EQUAL | BGFX_STENCIL_FUNC_REF(batch.stencilRef) | BGFX_STENCIL_FUNC_RMASK(0xFF);
@@ -258,26 +261,10 @@ void BGFXRenderDevice::SetCaps(const bool sRGB)
 {
 	auto bgfxCaps = bgfx::getCaps();
 
-	switch (bgfxCaps->rendererType)
-	{
-		case bgfx::RendererType::Direct3D9:
-		case bgfx::RendererType::Direct3D11:
-		case bgfx::RendererType::Direct3D12:
-		case bgfx::RendererType::Vulkan:
-			//	caps.centerPixelOffset = 0.5f;
-			//	break;
-		case bgfx::RendererType::OpenGL:
-		case bgfx::RendererType::Metal:
-			//	caps.centerPixelOffset = 0.0f;
-			//	break;
-		default:
-			caps.centerPixelOffset = 0.0f;
-			//	throw std::runtime_error("Unsupported renderer type: BGFXRenderDevice::BGFXRenderDevice(const bgfx::ViewId viewId");
-	}
-
-	caps.clipSpaceYInverted = bgfxCaps->originBottomLeft;
+	caps.centerPixelOffset = 0.0f;
+	caps.clipSpaceYInverted = false;
 	caps.depthRangeZeroToOne = !bgfxCaps->homogeneousDepth;
-	caps.linearRendering = false; //sRGB;
+	caps.linearRendering = false;
 	caps.subpixelRendering = false;
 }
 
@@ -332,7 +319,7 @@ void BGFXRenderDevice::SetUniforms(const Noesis::Batch& batch)
 
 	set(uniforms[0], batch.vertexUniforms[1]);
 	set(uniforms[1], batch.pixelUniforms[0]);
-	set(uniforms[1], batch.pixelUniforms[1]);
+	set(uniforms[2], batch.pixelUniforms[1]);
 }
 
 uint32_t BGFXRenderDevice::GetWrapTMode(const Noesis::SamplerState& sampler)
