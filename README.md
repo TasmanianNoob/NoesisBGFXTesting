@@ -9,7 +9,7 @@ Example is a conversion of this project https://github.com/Noesis/Tutorials/tree
 You can press F1 to view debug information. No idea if it's useful though.
 
 Here's an example of the intended output (The mouse click artifacts aren't actually there):
-https://imgur.com/warYgWY.gif
+https://i.imgur.com/x76BcOz.gif
 
 # Getting Setup
 If you're trying to get this to work first make sure that `BGFXRenderDevice/Src/Shaders/build_shaders.bat` is ran before the program to compile the shaders.
