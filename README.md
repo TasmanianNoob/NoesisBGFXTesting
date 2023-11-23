@@ -14,6 +14,8 @@ https://i.imgur.com/x76BcOz.gif
 # Getting Setup
 If you're trying to get this to work first make sure that `BGFXRenderDevice/Src/Shaders/build_shaders.bat` is ran before the program to compile the shaders.
 
+You may want to remove `BGFXRenderDeviceApi.hpp` when compiling. I had linker problems with this file in a different project and I really have no idea what it does but the official Noesis examples have a similar file so I added it anyway.
+
 If the program crashes immediately hopefully the issue is just you're compiling to the wrong shader language.
 Change `--profile s_5_0` to whatever is more appropriate. Use the debugger to check what `bgfx::getRendererType()` is set to. Probably metal on MacOS and spirv on Linux.
 Possible profiles:
